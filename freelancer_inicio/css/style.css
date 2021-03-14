@@ -1,0 +1,280 @@
+:root{ /*pseudo elementos, no existen en el HTML */
+/*sirve para almacenar variables custom de css*/
+    --blanco: #ffffff; /*paleta custom color blanco*/
+    --oscuro: #212121;
+    --primario: #ffc107; /*color principal */
+    --secundario: #0097a7;
+    --gris: #757575;
+    --grisClaro: #dfe9f3;
+}
+
+/*-------------------- GLOBALES -------------------------------*/
+html {
+    font-size: 62.5%;/*ESTAS LINEAS PERMITEN AYUDAR LA RELACION REM-PX*/ /* 1rem = 10px */
+    box-sizing: border-box; /*debe ir para usar CSS BOX*/
+    scroll-snap-type: y mandatory; /*hace scrooll de arriba a abajo */
+    /*luego tengo que ir a cada una de las secciones en la cual quiero que se detenga el snap*/
+}
+.servicios, .navegacion-principal, .formulario{
+    scroll-snap-align: center; /*peprmite el scroll snap en servicios formulario y nav*/
+    scroll-snap-stop: always; /* no muchos navegadores soportan el scroll snap*/
+}
+*, *:before, *:after { /*debe ir para usar CSS BOX*/
+    box-sizing: inherit;
+    /* codigo de https://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+}/* * indica que le coloque a todos los elementos de html */
+
+body{
+    font-size: 16px;/*ESTAS LINEAS PERMITEN AYUDAR LA RELACION REM-PX*/ /* 1rem = 10px */
+    font-family: 'Krub', sans-serif; /*fuente general para todo el documento */
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, var(--blanco) 100%);/*orientacion, 1er color, a que color va*/
+}
+
+.contenedor{ /*centrar contenido*/
+    max-width: 120rem; /*1200px estandar, usamos max y sino va bajando automaticamente */
+    /*ayuda al responsive web designn*/
+    margin: 0 auto 0 auto;
+    /* top right bottom left*/
+    /*equivalente al codigo de abajo*/
+    /*margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;*/
+}
+
+.boton{ 
+    background-color: var(--secundario);
+    color: var(--blanco);
+    padding: 1rem 3rem 1rem 3rem;
+    margin-top: 1rem; /*separacion entre elementos top*/
+    font-size: 2rem;
+    text-decoration: none;
+    text-transform: uppercase; /*mayusculas*/
+    font-weight: bold;
+    border-radius: .5rem; /*redondear esquinas del boton*/
+    width: 90%;
+    text-align: center;
+    border:none;
+}
+@media (min-width: 480px) { /*media querie del botonn*/
+    .boton{
+        width: auto;
+    }
+}
+
+.boton:hover{
+    cursor: pointer;
+}
+.sombra{
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.48);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.48);
+    box-shadow: 0px 5px 15px 0px rgba(112,112,112,0.48);
+    background-color: var(--blanco);
+    padding: 2rem;
+    border-radius: 1rem;
+    
+}
+
+/*------------------ TIPOGRAFIA ---------------------------------*/
+h1{
+    font-size: 3.8rem;
+    text-align: center;
+}
+h2{
+    font-size: 2.8rem;
+    text-align: center;
+}
+h3{
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/*---------------------- TITULOS----------------------------*/
+.titulo span { /*es buena practica poner h1 span y no solo SPAN, asi el codigo css se aplica solo al span especifico*/
+    font-size: 2rem;
+}
+
+/** UTILIDADES **/
+.w-100{
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .w-100{
+        margin-top: 3rem;
+        width: auto;
+    }
+}
+.flex{
+    display: flex;
+}
+.alinear-derecha{
+    justify-content: flex-end;
+}
+
+/*--------------- NAVEGACION-----------------*/
+.nav-bg{ /*aplica color a todo el espacio disponible del nav*/
+    background-color: var(--secundario);
+}
+.navegacion-principal{ /*PADRE DE LOS <a>*/
+    display: flex;
+    flex-direction: column; /*muestra en columnas*/
+    /*flex-direction: column; no sirve con justify content sino con align-items*/
+    /*align-items: center;*/
+    /*las propiedades con space distribuyen el contenido*/
+}
+
+@media (min-width: 768px) { /*tablet*/
+    .navegacion-principal{
+        flex-direction: row; /*cambia a filas a partir de 768px de resolucion, tablets o mas*/
+        justify-content: space-between; /*deja separacion entre cada item de nav*/
+    }
+}
+
+.navegacion-principal a{ /* color de los enlaces dentro de nav*/
+    display: block;/*ayuda al responsive design*/
+    text-align: center; /*ayuda al responsive design*/
+    color: var(--blanco);
+    text-decoration: none; /*quita la linea debajo de los enlaces */
+    font-size: 2rem;
+    font-weight: bold; /* 700px segun nuestra fuente */
+    padding: 1rem; /*1rem 1rem 1rem 1rem top right bot left, hace mas alta la barra de nave*/
+}
+
+.navegacion-principal a:hover{ /* :hover permite que cambie de color al poner el raton arriba, pseudo clase*/
+    background-color: var(--primario);   /*cambia color de fondo al momento del hover*/
+    color: var(--oscuro); /*cambia color de texto al hover*/
+}
+
+/*------------- HERO --------------*/
+.hero{ /*agregar imagen via css*/
+    background-image: url(../img/hero.jpg); /*imagen de fondo*/
+    /*el .. es para salir de la carpeta actual(donde se encuentra este archivo)*/
+    background-repeat: no-repeat; /*que no se repita la img*/
+    background-size: cover; /*toma todo el ancho disponible*/
+    height: 450px;
+    position: relative; /*elemento padre siempre relativa, asi el hijo se posicionna absoluta */
+    margin-bottom: 2rem;
+}
+
+.contenido-hero { /*sombreado a la imagen */
+    position: absolute;
+    background-color: rgba(0, 0, 0, .7); /*a de 0 a 1 para transparencia*/
+    /*background-color: rgb(0 0 0 / 70%); /* sintaxis nueva. / 0 al 100% intensidad*/
+    width: 100%; /*toma todo el espacio disponible donde el .hero le permita */
+    height: 100%;
+
+    /*CODIGO PARA ALINEAR HORIZONTAL Y VERTICALMENTE*/
+    display: flex; /*asi sus hijos son flex*/
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /*CODIGO PARA ALINEAR HORIZONTAL Y VERTICALMENTE*/
+}
+
+.contenido-hero h2, /*misma regla css para h2 y p de contenido hero*/
+.contenido-hero p{
+    color: var(--blanco);
+}
+
+.ubicacion{
+    display: flex;
+    align-items:flex-end;
+}
+
+/*------------- SERVICIOS ----------------------*/
+
+@media (min-width: 768px) {
+    .servicios {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 1rem; /*separacion de contenido con la columna.*/
+    }
+}
+
+.servicio{ /*centra el contenido de los circulos amarillos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.servicio h3{
+    color: var(--secundario);
+    font-weight: normal;
+}
+
+.servicio p{
+    line-height: 2; /*interlineado*/
+    text-align: center;
+}
+
+.servicio .iconos{
+    height: 15rem;
+    width: 15rem;
+    background-color: var(--primario);
+    border-radius: 50%; /*crea un circulo */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/*----- CONTACTO ----*/
+
+.formulario {
+    background-color: var(--gris);
+    width: min(60rem, 100%); /*min utiliza el valor mas pequeño y sino toma el segunndo paraaametro */
+    /*asigna entre 60rem y 100%, ahorra mediaQ. Hay veces que 100 es mas pequeño que 60rem*/
+    margin: 0 auto; /*centro el formulario, sirve cuando el padre del elemento no es un display: flex*/
+    padding: 2rem;
+    border-radius: 1rem;
+}
+.formulario fieldset{
+    border: none; /*quito el borde por default al fieldset */
+}
+.formulario legend{
+    text-align: center;
+    margin: 0 auto; /*para que se cenntre */
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--primario);
+}
+
+@media (min-width: 768px) {
+    .contenedor-campos{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto 20rem;
+        column-gap: 1rem; /*separacion columnas */
+    }
+    .campo:nth-child(3){ /* si hay mas de unn elemento con la misma clase, elige segun el orden indicado */
+        /*TU EMAIL*/
+        grid-column: 1 / 3 ;/*seleccion de que columna a que columna va el elemento*/
+    }
+    .campo:nth-child(4){ /* MENSAJE*/
+        grid-column: 1 / 3;
+    }
+}
+.campo{
+    margin-bottom: 1rem;
+}
+
+.campo label{
+    color: var(--blanco);
+    font-weight: bold;
+    margin-bottom: .5rem;
+    display: block;
+}
+.campo textarea{
+    height: 20rem;
+}
+.input-text{
+    width:100%;
+    border: none;
+    padding: 1.5rem;
+    border-radius: .5rem;
+}
+
+/*------ FOOTER -----*/
+.footer{
+    text-align: center;
+}
